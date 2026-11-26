@@ -266,9 +266,6 @@
     .session-note { max-width: 220px; overflow: hidden; color: #97a2b1; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
     .log-empty { padding: 22px; border: 1px dashed #dce3ec; border-radius: 12px; color: #99a4b2; background: #fcfdff; font-size: 10px; text-align: center; }
     .page-footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: 30px; padding-top: 15px; border-top: 1px solid #e8edf3; color: #a0a9b5; font-size: 9px; }
-    .footer-tools { display: flex; gap: 13px; }
-    .footer-tools button { padding: 0; border: 0; color: #7e8a9c; background: transparent; font-size: 9px; }
-    .footer-tools button:hover { color: var(--navy); text-decoration: underline; }
 
     dialog {
       width: min(440px, calc(100vw - 28px));
@@ -413,6 +410,71 @@
     body.theme-dark .dialog-body { background:var(--paper); }
     body.theme-dark .cloud-account { border-color:var(--line); }
     body.theme-dark .welcome-panel { box-shadow:0 12px 30px rgba(0,0,0,.25); }
+
+    /* Unified settings panel */
+    .settings-dialog { width:min(880px, calc(100vw - 28px)); max-height:calc(100dvh - 34px); overflow:hidden; }
+    .settings-dialog-head { padding:18px 22px 15px; }
+    .settings-dialog-head .eyebrow { margin-bottom:3px; }
+    .settings-dialog-head h2 { margin-bottom:3px; }
+    .settings-layout { display:grid; grid-template-columns:190px minmax(0,1fr); min-height:440px; max-height:calc(100dvh - 125px); }
+    .settings-nav { display:flex; flex-direction:column; gap:5px; padding:16px 12px; border-right:1px solid var(--line); background:var(--canvas); }
+    .settings-tab { display:flex; align-items:center; gap:10px; width:100%; min-height:42px; padding:0 12px; border:1px solid transparent; border-radius:10px; color:var(--muted); background:transparent; text-align:left; font-size:11px; font-weight:700; white-space:nowrap; }
+    .settings-tab span { display:inline-grid; place-items:center; width:19px; font-size:16px; }
+    .settings-tab:hover { color:var(--ink); background:rgba(120,135,160,.08); }
+    .settings-tab.active { color:var(--ink); border-color:var(--line); background:var(--paper); box-shadow:0 2px 8px rgba(20,35,60,.04); }
+    .settings-content { min-width:0; max-height:calc(100dvh - 125px); overflow:auto; padding:22px 24px 24px; background:var(--paper); }
+    .settings-panel[hidden] { display:none; }
+    .settings-section-head { margin-bottom:17px; }
+    .settings-section-head h3 { margin:0 0 4px; color:var(--ink); font-size:15px; letter-spacing:-.2px; }
+    .settings-section-head p { margin:0; color:var(--muted); font-size:10px; }
+    .setting-row { display:flex; justify-content:space-between; align-items:center; gap:15px; margin-bottom:9px; padding:13px 14px; border:1px solid var(--line); border-radius:11px; background:var(--paper); cursor:pointer; }
+    .setting-row strong, .backup-card strong, .settings-danger strong { display:block; color:var(--ink); font-size:11px; }
+    .setting-row small, .about-card small { display:block; margin-top:3px; color:var(--muted); font-size:9px; line-height:1.45; }
+    .setting-row input[type="checkbox"] { flex:0 0 auto; width:18px; height:18px; accent-color:var(--teal); }
+    .settings-info { padding:12px 13px; border:1px solid var(--line); border-radius:10px; color:var(--muted); background:var(--canvas); font-size:10px; line-height:1.55; }
+    .settings-info strong { color:var(--ink); }
+    .settings-actions { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:9px; margin-top:17px; }
+    .settings-action-group { display:flex; justify-content:flex-end; flex-wrap:wrap; gap:8px; }
+    .settings-cloud-actions { align-items:center; }
+    .appearance-preview { display:flex; align-items:center; gap:10px; margin-top:16px; padding:12px; border:1px solid var(--line); border-radius:11px; background:var(--canvas); }
+    .preview-swatch { width:28px; height:28px; border-radius:9px; background:var(--teal); box-shadow:0 0 0 4px color-mix(in srgb, var(--teal) 15%, transparent); }
+    .appearance-preview strong { display:block; color:var(--ink); font-size:10px; }
+    .appearance-preview small { display:block; margin-top:2px; color:var(--muted); font-size:9px; }
+    .preview-pill { margin-left:auto; padding:6px 10px; border-radius:8px; color:white; background:var(--teal); font-size:9px; font-weight:750; }
+    .backup-card, .settings-danger { display:flex; justify-content:space-between; align-items:center; gap:14px; margin-bottom:10px; padding:13px 14px; border:1px solid var(--line); border-radius:11px; background:var(--paper); }
+    .backup-card p, .settings-danger p { margin:4px 0 0; color:var(--muted); font-size:9px; line-height:1.5; }
+    .settings-danger { border-color:#efdada; background:#fffafa; }
+    .settings-danger strong { color:#a64f4f; }
+    .settings-danger p { color:#9b7777; }
+    .about-card { display:flex; align-items:center; gap:12px; margin-bottom:12px; padding:14px; border:1px solid var(--line); border-radius:11px; }
+    .about-card .brand-mark { flex:0 0 39px; }
+    .about-card strong { display:block; color:var(--ink); font-size:12px; }
+    .settings-link-list { display:flex; flex-wrap:wrap; gap:16px; margin-top:14px; }
+    .settings-link-list a, .settings-help a { color:var(--teal); font-size:10px; font-weight:700; text-decoration:none; }
+    .settings-link-list a:hover, .settings-help a:hover { text-decoration:underline; }
+    .settings-help { line-height:1.65; }
+    .settings-help a { display:inline-block; margin-top:5px; }
+    body.compact-mode .panel { padding:16px; }
+    body.compact-mode .stat-card { min-height:76px; padding:12px 13px; }
+    body.compact-mode .welcome-panel { min-height:170px; padding:22px 26px; }
+    body.reduce-motion-mode *, body.reduce-motion-mode *::before, body.reduce-motion-mode *::after { scroll-behavior:auto !important; animation:none !important; transition:none !important; }
+    body.theme-dark .settings-nav { background:#101b2c; }
+    body.theme-dark .settings-tab.active { background:var(--paper); }
+    body.theme-dark .settings-danger { border-color:#543b43; background:#2a202a; }
+    body.theme-dark .settings-danger strong { color:#f0aaaa; }
+    body.theme-dark .settings-danger p { color:#c49a9a; }
+    @media (max-width:600px) {
+      .settings-dialog { width:calc(100vw - 18px); max-height:calc(100dvh - 18px); }
+      .settings-dialog-head { padding:15px 15px 12px; }
+      .settings-layout { grid-template-columns:1fr; min-height:0; max-height:calc(100dvh - 105px); }
+      .settings-nav { flex-direction:row; overflow-x:auto; gap:5px; padding:9px 10px; border-right:0; border-bottom:1px solid var(--line); }
+      .settings-tab { flex:0 0 auto; width:auto; min-height:35px; padding:0 10px; font-size:9px; }
+      .settings-tab span { display:none; }
+      .settings-content { max-height:calc(100dvh - 160px); padding:16px 13px 18px; }
+      .backup-card, .settings-danger { align-items:flex-start; flex-direction:column; }
+      .settings-action-group { justify-content:flex-start; }
+      .settings-cloud-actions { align-items:flex-start; flex-direction:column; }
+    }
   </style>
 </head>
 <body>
@@ -447,8 +509,7 @@
           <div class="top-actions">
             <div class="date-chip"><span aria-hidden="true">▦</span><span id="todayDate"></span></div>
             <span class="cloud-chip" id="cloudChip">Cloud setup required</span>
-            <button class="btn btn-secondary" type="button" id="appearanceButton">Appearance</button>
-            <button class="btn btn-secondary" type="button" id="cloudSettingsButton">Cloud settings</button>
+            <button class="btn btn-secondary" type="button" id="settingsButton" aria-haspopup="dialog" aria-controls="settingsDialog"><span aria-hidden="true">⚙</span> Settings</button>
             <button class="btn btn-primary" type="button" data-open="subject">＋ Add subject</button>
           </div>
         </header>
@@ -556,11 +617,7 @@
 
         <footer class="page-footer">
           <span id="footerSyncText">Job Prep Dashboard · Study data is saved to your cloud account after setup.</span>
-          <div class="footer-tools">
-            <button type="button" id="exportData">Export backup</button>
-            <button type="button" id="importData">Import backup</button>
-            <button type="button" id="resetData">Reset cloud data</button>
-          </div>
+
         </footer>
         <input type="file" id="importFile" accept="application/json,.json" hidden />
       </div>
@@ -607,30 +664,72 @@
     </form>
   </dialog>
 
-  <dialog id="cloudDialog">
-    <div class="dialog-head"><div><h2>Cloud storage &amp; account</h2><p>Connect your Supabase project, then sign in to sync your study data.</p></div><button class="icon-btn" type="button" data-close="cloudDialog" aria-label="Close">✕</button></div>
-    <div class="dialog-body">
-      <div class="settings-help"><strong>One-time setup:</strong> create a Supabase project, run the SQL setup file supplied with this dashboard, then enter your Project URL and publishable key below. Your study records are stored in Supabase, not browser storage. Never enter a service-role or secret key here.</div>
-      <div class="field"><label for="supabaseUrl">Supabase Project URL</label><input id="supabaseUrl" type="url" placeholder="https://your-project.supabase.co" autocomplete="url" /></div>
-      <div class="field"><label for="supabaseKey">Publishable key (or legacy anon key)</label><input id="supabaseKey" type="text" placeholder="sb_publishable_…" autocomplete="off" /></div>
-      <div class="field"><label for="cloudEmail">Email</label><input id="cloudEmail" type="email" placeholder="you@example.com" autocomplete="username" /></div>
-      <div class="field"><label for="cloudPassword">Password</label><input id="cloudPassword" type="password" placeholder="Your Supabase account password" autocomplete="current-password" /></div>
-      <div class="cloud-error" id="cloudError"></div>
-      <div class="status-line" id="cloudDialogStatus">Connection settings are stored on this device. Study data is stored in Supabase after sign-in.</div>
-      <div class="cloud-account" id="cloudAccount"></div>
-      <div class="dialog-actions" style="justify-content:space-between;flex-wrap:wrap">
-        <button class="btn btn-secondary" type="button" id="cloudSignOut" hidden>Sign out</button>
-        <span style="display:flex;gap:8px;flex-wrap:wrap;margin-left:auto"><button class="btn btn-secondary" type="button" id="legacyImport" hidden>Import previous browser copy</button><button class="btn btn-secondary" type="button" id="cloudRetrySave" hidden>Retry cloud save</button><button class="btn btn-secondary" type="button" id="cloudSignUp">Create account</button><button class="btn btn-primary" type="button" id="cloudSignIn">Save connection &amp; sign in</button></span>
-      </div>
+  <dialog id="settingsDialog" class="settings-dialog" aria-labelledby="settingsTitle">
+    <div class="dialog-head settings-dialog-head">
+      <div><div class="eyebrow">Dashboard preferences</div><h2 id="settingsTitle">Settings</h2><p>Control your workspace, appearance, cloud account and backups.</p></div>
+      <button class="icon-btn" type="button" data-close="settingsDialog" aria-label="Close settings">✕</button>
     </div>
-  </dialog>
+    <div class="settings-layout">
+      <nav class="settings-nav" aria-label="Settings categories">
+        <button class="settings-tab active" type="button" data-settings-tab="general" aria-pressed="true"><span aria-hidden="true">☷</span> General</button>
+        <button class="settings-tab" type="button" data-settings-tab="appearance" aria-pressed="false"><span aria-hidden="true">◐</span> Appearance</button>
+        <button class="settings-tab" type="button" data-settings-tab="cloud" aria-pressed="false"><span aria-hidden="true">☁</span> Cloud &amp; account</button>
+        <button class="settings-tab" type="button" data-settings-tab="backup" aria-pressed="false"><span aria-hidden="true">⇅</span> Data &amp; backup</button>
+        <button class="settings-tab" type="button" data-settings-tab="about" aria-pressed="false"><span aria-hidden="true">ⓘ</span> About</button>
+      </nav>
+      <div class="settings-content">
+        <section class="settings-panel" data-settings-panel="general">
+          <div class="settings-section-head"><h3>General preferences</h3><p>Adjust how the dashboard behaves on this device.</p></div>
+          <label class="setting-row" for="compactMode"><span><strong>Compact layout</strong><small>Reduce spacing in cards and dashboard sections.</small></span><input id="compactMode" type="checkbox" /></label>
+          <label class="setting-row" for="reducedMotion"><span><strong>Reduce motion</strong><small>Minimise animations and transitions throughout the dashboard.</small></span><input id="reducedMotion" type="checkbox" /></label>
+          <div class="settings-info"><strong>Study data and preferences</strong><br />Your subjects, topics and study sessions sync to your signed-in cloud account. Display preferences are also saved on this device.</div>
+          <div class="settings-actions"><span class="status-line" id="preferencesStatus" role="status"></span><button class="btn btn-primary" type="button" id="savePreferences">Save preferences</button></div>
+        </section>
 
-  <dialog id="appearanceDialog">
-    <div class="dialog-head"><div><h2>Personalisation</h2><p>Adjust the dashboard's appearance.</p></div><button class="icon-btn" type="button" data-close="appearanceDialog" aria-label="Close">✕</button></div>
-    <div class="dialog-body">
-      <div class="field"><label for="themeSelect">Theme</label><select id="themeSelect"><option value="system">Follow device setting</option><option value="light">Light</option><option value="dark">Dark</option></select></div>
-      <div class="field"><label for="accentColor">Accent colour</label><div class="color-field"><input id="accentColor" type="color" value="#4e9b8d" /><span>Choose a primary highlight colour for buttons, progress and controls.</span></div></div>
-      <div class="dialog-actions"><button class="btn btn-primary" type="button" id="saveAppearance">Apply appearance</button></div>
+        <section class="settings-panel" data-settings-panel="appearance" hidden>
+          <div class="settings-section-head"><h3>Appearance</h3><p>Choose a theme and dashboard accent colour.</p></div>
+          <div class="field"><label for="themeSelect">Colour theme</label><select id="themeSelect"><option value="system">Follow device setting</option><option value="light">Light</option><option value="dark">Dark</option></select></div>
+          <div class="field"><label for="accentColor">Accent colour</label><div class="color-field"><input id="accentColor" type="color" value="#4e9b8d" /><span>Used for highlights, progress indicators and primary controls.</span></div></div>
+          <div class="appearance-preview"><span class="preview-swatch"></span><div><strong>Accent preview</strong><small>Your selected colour is applied across the dashboard.</small></div><span class="preview-pill">Preview</span></div>
+          <div class="settings-actions"><span class="status-line" id="appearanceStatus" role="status"></span><button class="btn btn-primary" type="button" id="savePreferencesAppearance">Apply appearance</button></div>
+        </section>
+
+        <section class="settings-panel" data-settings-panel="cloud" hidden>
+          <div class="settings-section-head"><h3>Cloud storage &amp; account</h3><p>Connect Supabase to keep your preparation data available across devices.</p></div>
+          <div class="settings-help"><strong>One-time setup:</strong> create a Supabase project, run the SQL setup file supplied with this dashboard, then enter your Project URL and publishable key below. Your study records are stored in Supabase, not browser storage. Never enter a service-role or secret key here.<br /><a href="https://github.com/Rashedul0103/job-exam-dashboard/blob/main/SETUP-CLOUD-STORAGE.md" target="_blank" rel="noopener">Open the cloud setup guide</a> · <a href="https://github.com/Rashedul0103/job-exam-dashboard/blob/main/job-prep-supabase-setup.sql" target="_blank" rel="noopener">View database SQL</a></div>
+          <div class="field"><label for="supabaseUrl">Supabase Project URL</label><input id="supabaseUrl" type="url" placeholder="https://your-project.supabase.co" autocomplete="url" /></div>
+          <div class="field"><label for="supabaseKey">Publishable key (or legacy anon key)</label><input id="supabaseKey" type="text" placeholder="sb_publishable_…" autocomplete="off" /></div>
+          <div class="field"><label for="cloudEmail">Email</label><input id="cloudEmail" type="email" placeholder="you@example.com" autocomplete="username" /></div>
+          <div class="field"><label for="cloudPassword">Password</label><input id="cloudPassword" type="password" placeholder="Your Supabase account password" autocomplete="current-password" /></div>
+          <div class="cloud-error" id="cloudError" role="alert"></div>
+          <div class="status-line" id="cloudDialogStatus" role="status">Connection settings are stored on this device. Study data is stored in Supabase after sign-in.</div>
+          <div class="cloud-account" id="cloudAccount"></div>
+          <div class="settings-actions settings-cloud-actions">
+            <button class="btn btn-secondary" type="button" id="cloudSignOut" hidden>Sign out</button>
+            <div class="settings-action-group">
+              <button class="btn btn-secondary" type="button" id="legacyImport" hidden>Import previous browser copy</button>
+              <button class="btn btn-secondary" type="button" id="cloudRetrySave" hidden>Retry cloud save</button>
+              <button class="btn btn-secondary" type="button" id="cloudSignUp">Create account</button>
+              <button class="btn btn-primary" type="button" id="cloudSignIn">Save connection &amp; sign in</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="settings-panel" data-settings-panel="backup" hidden>
+          <div class="settings-section-head"><h3>Data &amp; backup</h3><p>Export a copy of your study plan or restore a previous backup.</p></div>
+          <div class="backup-card"><div><strong>Export study data</strong><p>Download your subjects, topics, study sessions and preferences as a JSON file.</p></div><button class="btn btn-secondary" type="button" id="exportData">↓ Export backup</button></div>
+          <div class="backup-card"><div><strong>Import a backup</strong><p>Restore data from a dashboard JSON backup. Your current data is backed up first.</p></div><button class="btn btn-secondary" type="button" id="importData">↑ Import backup</button></div>
+          <div class="settings-danger"><div><strong>Reset cloud data</strong><p>Remove all subjects, topics, study sessions and the active timer from your cloud account. A backup is downloaded before the reset.</p></div><button class="btn btn-danger" type="button" id="resetData">Reset data</button></div>
+          <div class="settings-info">Keep a recent backup before making major changes. Importing a file replaces the current cloud data after confirmation.</div>
+        </section>
+
+        <section class="settings-panel" data-settings-panel="about" hidden>
+          <div class="settings-section-head"><h3>About this dashboard</h3><p>A personal workspace for structured job-exam preparation.</p></div>
+          <div class="about-card"><div class="brand-mark">JP</div><div><strong>Job Exam Prep Dashboard</strong><small>Cloud Edition · Version 2.1</small></div></div>
+          <div class="settings-info"><strong>Storage model</strong><br />The website is hosted as a static GitHub Pages site. Supabase stores your study data under your signed-in account. Your Supabase project URL and publishable key are kept in this browser; never put a service-role key in the dashboard.</div>
+          <div class="settings-link-list"><a href="https://github.com/Rashedul0103/job-exam-dashboard" target="_blank" rel="noopener">View project on GitHub ↗</a><a href="https://supabase.com/dashboard" target="_blank" rel="noopener">Open Supabase dashboard ↗</a></div>
+        </section>
+      </div>
     </div>
   </dialog>
 
@@ -642,7 +741,7 @@
       const PREF_KEY = 'jobPrepDashboard_uiPrefs_v2';
       const TABLE = 'job_prep_data';
       const subjectColors = ['#4e9b8d', '#6278d8', '#d79a43', '#b77ab4', '#5c9bb7', '#cf7d70', '#7e9b63'];
-      const emptyData = () => ({subjects: [], sessions: [], activeTimer: null, preferences: {theme: 'system', accent: '#4e9b8d'}});
+      const emptyData = () => ({subjects: [], sessions: [], activeTimer: null, preferences: {theme: 'system', accent: '#4e9b8d', compactLayout: false, reducedMotion: false}});
       let data = emptyData();
       let supabaseClient = null;
       let currentUser = null;
@@ -728,8 +827,12 @@
         const accent = /^#[0-9a-f]{6}$/i.test(data.preferences?.accent || '') ? data.preferences.accent : '#4e9b8d';
         document.documentElement.style.setProperty('--teal', accent);
         document.documentElement.style.setProperty('--accent', accent);
+        document.body.classList.toggle('compact-mode', Boolean(data.preferences?.compactLayout));
+        document.body.classList.toggle('reduce-motion-mode', Boolean(data.preferences?.reducedMotion));
         if ($('#themeSelect')) $('#themeSelect').value = theme;
         if ($('#accentColor')) $('#accentColor').value = accent;
+        if ($('#compactMode')) $('#compactMode').checked = Boolean(data.preferences?.compactLayout);
+        if ($('#reducedMotion')) $('#reducedMotion').checked = Boolean(data.preferences?.reducedMotion);
       }
       function render() {
         renderStats();
@@ -827,11 +930,7 @@
         }
       }
       function openCloudDialog() {
-        $('#supabaseUrl').value = cloudConfig.url || '';
-        $('#supabaseKey').value = cloudConfig.key || '';
-        $('#cloudError').classList.remove('show');
-        syncCloudDialog();
-        openDialog('cloudDialog');
+        openSettings('cloud');
       }
       function syncCloudDialog() {
         $('#legacyImport').hidden = !currentUser || !localStorage.getItem('jobPrepDashboard_v1');
@@ -873,7 +972,8 @@
         }
         const {error} = await supabaseClient.auth.signOut();
         if (error) { alert(`Sign out failed: ${error.message}`); return; }
-        currentUser = null; data = emptyData(); expandedSubjects.clear();
+        const preferences = data.preferences;
+        currentUser = null; data = emptyData(); data.preferences = preferences; expandedSubjects.clear();
         setSyncStatus('Signed out', 'not-configured'); render(); syncCloudDialog();
       }
       function getSubject(id) { return data.subjects.find(s => s.id === id); }
@@ -885,6 +985,26 @@
       function closeDialog(id) {
         const dialog = document.getElementById(id);
         if (dialog?.open) dialog.close();
+      }
+      function switchSettingsTab(section = 'general') {
+        const valid = ['general', 'appearance', 'cloud', 'backup', 'about'];
+        const active = valid.includes(section) ? section : 'general';
+        $$('[data-settings-tab]').forEach(button => {
+          const selected = button.dataset.settingsTab === active;
+          button.classList.toggle('active', selected);
+          button.setAttribute('aria-pressed', String(selected));
+        });
+        $$('[data-settings-panel]').forEach(panel => { panel.hidden = panel.dataset.settingsPanel !== active; });
+      }
+      function openSettings(section = 'general') {
+        if (section === 'cloud') {          $('#supabaseUrl').value = cloudConfig.url || '';
+          $('#supabaseKey').value = cloudConfig.key || '';
+          $('#cloudError').classList.remove('show');
+          syncCloudDialog();
+        }
+        if (section === 'appearance' || section === 'general') applyAppearance();
+        switchSettingsTab(section);
+        openDialog('settingsDialog');
       }
       function refreshSelects() {
         const options = data.subjects.map(s => `<option value="${escapeHTML(s.id)}">${escapeHTML(s.name)}</option>`).join('');
@@ -997,7 +1117,8 @@
         list.innerHTML = sessions.map(session => {
           const subjectName = getSubject(session.subjectId)?.name || 'General study';
           return `<div class="session-row"><div class="session-date-icon" aria-hidden="true">◷</div><div><div class="session-name">${escapeHTML(session.note || subjectName)}</div><div class="session-detail">${escapeHTML(formatDate(session.date))} · ${escapeHTML(subjectName)}</div></div><div class="session-duration">${escapeHTML(formatElapsed(Math.round(sessionSeconds(session))))}</div><button class="icon-btn" type="button" data-action="delete-session" data-id="${escapeHTML(session.id)}" aria-label="Delete study session" title="Delete session">×</button></div>`;
-        }).join('');      }
+        }).join('');
+      }
       function elapsedTimerMs(timer) {
         if (!timer) return 0;
         return Math.max(0, Number(timer.accumulatedMs) || 0) + (timer.paused || !timer.startedAt ? 0 : Math.max(0, Date.now() - Date.parse(timer.startedAt)));
@@ -1193,7 +1314,7 @@
       });
 
       $('#subjectSearch').addEventListener('input', event => { searchTerm = event.target.value; renderSubjects(); });
-      $$('#subjectDialog, #topicDialog, #sessionDialog, #cloudDialog, #appearanceDialog').forEach(dialog => {
+      $$('#subjectDialog, #topicDialog, #sessionDialog, #settingsDialog').forEach(dialog => {
         dialog.addEventListener('click', event => {
           if (event.target === dialog) dialog.close();
         });
@@ -1245,20 +1366,46 @@
       $('#timerPause').addEventListener('click', pauseTimer);
       $('#timerResume').addEventListener('click', resumeTimer);
       $('#timerStop').addEventListener('click', stopTimer);
-      $('#cloudSettingsButton').addEventListener('click', openCloudDialog);
+      $('#settingsButton').addEventListener('click', () => openSettings('general'));
+      $$('[data-settings-tab]').forEach(button => button.addEventListener('click', () => {
+        const section = button.dataset.settingsTab;
+        if (section === 'cloud') {
+          $('#supabaseUrl').value = cloudConfig.url || '';
+          $('#supabaseKey').value = cloudConfig.key || '';
+          $('#cloudError').classList.remove('show');
+          syncCloudDialog();
+        }
+        if (section === 'appearance' || section === 'general') applyAppearance();
+        switchSettingsTab(section);
+      }));
       $('#cloudSignIn').addEventListener('click', () => connectCloud('signin'));
       $('#cloudSignUp').addEventListener('click', () => connectCloud('signup'));
       $('#cloudSignOut').addEventListener('click', signOutCloud);
       $('#cloudRetrySave').addEventListener('click', async () => { await saveData(); syncCloudDialog(); });
       $('#legacyImport').addEventListener('click', importLegacyBrowserCopy);
-      $('#appearanceButton').addEventListener('click', () => { applyAppearance(); openDialog('appearanceDialog'); });
-      $('#saveAppearance').addEventListener('click', () => {
-        data.preferences = {theme:$('#themeSelect').value, accent:$('#accentColor').value};
-        applyAppearance(); closeDialog('appearanceDialog');
-        if (currentUser) saveData();
-        else {
-          try { localStorage.setItem(PREF_KEY, JSON.stringify(data.preferences)); } catch {}
+      const savePreferences = async (statusSelector) => {
+        data.preferences = {
+          ...(data.preferences || {}),
+          theme:$('#themeSelect').value,
+          accent:$('#accentColor').value,
+          compactLayout:$('#compactMode').checked,
+          reducedMotion:$('#reducedMotion').checked
+        };
+        applyAppearance();
+        try { localStorage.setItem(PREF_KEY, JSON.stringify(data.preferences)); } catch {}
+        const status = $(statusSelector);
+        if (currentUser) {
+          const saved = await saveData();
+          if (status) status.textContent = saved ? 'Preferences saved and synced.' : 'Could not sync preferences. Check cloud status.';
+        } else if (status) {
+          status.textContent = 'Preferences saved on this device.';
         }
+      };
+      $('#savePreferences').addEventListener('click', () => savePreferences('#preferencesStatus'));
+      $('#savePreferencesAppearance').addEventListener('click', () => savePreferences('#appearanceStatus'));
+      $('#accentColor').addEventListener('input', event => {
+        document.documentElement.style.setProperty('--teal', event.target.value);
+        document.documentElement.style.setProperty('--accent', event.target.value);
       });
       window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener?.('change', () => {
         if (data.preferences?.theme === 'system') applyAppearance();
