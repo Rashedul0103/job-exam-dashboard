@@ -89,6 +89,7 @@
     }
     .nav-link:hover { color: white; background: rgba(255,255,255,.07); }
     .nav-link.active { color: white; background: #2c3e5d; box-shadow: inset 3px 0 #72b8a9; }
+    .settings-nav-button { width: 100%; border: 0; background: transparent; font-family: inherit; text-align: left; cursor: pointer; }
     .nav-icon { display: inline-grid; place-items: center; width: 19px; color: currentColor; }
     .sidebar-bottom { margin-top: auto; }
     .local-note {
@@ -313,8 +314,9 @@
     @media (max-width: 600px) {
       .sidebar { grid-template-columns: 1fr; gap: 9px; padding: 10px 13px 8px; }
       .brand { justify-content: center; }
-      .nav-list { justify-content: center; }
-      .nav-link { min-height: 32px; padding: 0 9px; }
+      .nav-list { justify-content: center; flex-wrap: nowrap; width: 100%; overflow-x: auto; scrollbar-width: none; }
+      .nav-list::-webkit-scrollbar { display: none; }
+      .nav-link { flex: 0 0 auto; min-height: 32px; padding: 0 9px; }
       .nav-icon { display: none; }
       .main { padding: 21px 13px 28px; }
       .topbar { align-items: flex-start; margin-bottom: 19px; }
@@ -490,6 +492,7 @@
           <a class="nav-link active" href="#overview" data-nav="overview"><span class="nav-icon" aria-hidden="true">⌂</span>Dashboard</a>
           <a class="nav-link" href="#subjects" data-nav="subjects"><span class="nav-icon" aria-hidden="true">▤</span>Subjects &amp; topics</a>
           <a class="nav-link" href="#study-log" data-nav="study-log"><span class="nav-icon" aria-hidden="true">◷</span>Study log</a>
+          <button class="nav-link settings-nav-button" type="button" id="settingsButton" aria-haspopup="dialog" aria-controls="settingsDialog"><span class="nav-icon" aria-hidden="true">⚙</span>Settings</button>
         </nav>
       </div>
       <div class="sidebar-bottom">
@@ -505,12 +508,6 @@
             <div class="eyebrow">Your preparation workspace</div>
             <h1>Study dashboard</h1>
             <p class="page-subtitle" id="todayGreeting">A clear view of your progress, one step at a time.</p>
-          </div>
-          <div class="top-actions">
-            <div class="date-chip"><span aria-hidden="true">▦</span><span id="todayDate"></span></div>
-            <span class="cloud-chip" id="cloudChip">Cloud setup required</span>
-            <button class="btn btn-secondary" type="button" id="settingsButton" aria-haspopup="dialog" aria-controls="settingsDialog"><span aria-hidden="true">⚙</span> Settings</button>
-            <button class="btn btn-primary" type="button" data-open="subject">＋ Add subject</button>
           </div>
         </header>
 
@@ -997,10 +994,10 @@
         $$('[data-settings-panel]').forEach(panel => { panel.hidden = panel.dataset.settingsPanel !== active; });
       }
       function openSettings(section = 'general') {
-        if (section === 'cloud') {          $('#supabaseUrl').value = cloudConfig.url || '';
+        if (section === 'cloud') {
+          $('#supabaseUrl').value = cloudConfig.url || '';
           $('#supabaseKey').value = cloudConfig.key || '';
-          $('#cloudError').classList.remove('show');
-          syncCloudDialog();
+          $('#cloudError').classList.remove('show');          syncCloudDialog();
         }
         if (section === 'appearance' || section === 'general') applyAppearance();
         switchSettingsTab(section);
@@ -1418,7 +1415,6 @@
       });
 
       const date = new Date();
-      $('#todayDate').textContent = date.toLocaleDateString(undefined, {weekday:'short', day:'numeric', month:'short', year:'numeric'});
       const hour = date.getHours();
       $('#todayGreeting').textContent = `${hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening'}. Your preparation progress at a glance.`;
       $$('[data-nav]').forEach(link => link.addEventListener('click', () => {
